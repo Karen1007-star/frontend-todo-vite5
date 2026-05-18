@@ -87,43 +87,72 @@ export default function App() {
   // =========================
   // UI
   // =========================
-  return (
-    <div style={{ padding: "20px" }}>
+ return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white flex justify-center p-6">
 
-      <h1>TODO LIST</h1>
+      <div className="w-full max-w-xl">
 
-      <input
-        value={tarea}
-        onChange={(e) => setTarea(e.target.value)}
-        placeholder="Nueva tarea"
-      />
+        {/* HEADER */}
+        <h1 className="text-4xl font-bold text-center mb-6 text-cyan-400">
+          📝 TODO LIST
+        </h1>
 
-      <button onClick={agregar}>Agregar</button>
+        {/* INPUT AGREGAR */}
+        <div className="flex gap-2 mb-4">
+          <input
+            value={tarea}
+            onChange={(e) => setTarea(e.target.value)}
+            placeholder="Escribe una tarea..."
+            className="flex-1 p-3 rounded-xl bg-slate-700 text-white outline-none focus:ring-2 focus:ring-cyan-400"
+          />
 
-      <br /><br />
+          <button
+            onClick={agregar}
+            className="bg-cyan-500 hover:bg-cyan-600 px-4 rounded-xl font-bold"
+          >
+            +
+          </button>
+        </div>
 
-      <input
-        value={buscar}
-        onChange={(e) => setBuscar(e.target.value)}
-        placeholder="Buscar"
-      />
+        {/* SEARCH */}
+        <input
+          value={buscar}
+          onChange={(e) => setBuscar(e.target.value)}
+          placeholder="Buscar tarea..."
+          className="w-full p-3 mb-6 rounded-xl bg-slate-700 text-white outline-none focus:ring-2 focus:ring-cyan-400"
+        />
 
-      <ul>
-        {tareasFiltradas.map((t) => (
-          <li key={t.id}>
-            {t.tarea + " "} 
+        {/* LISTA */}
+        <ul className="space-y-3">
+          {tareasFiltradas.map((t) => (
+            <li
+              key={t.id}
+              className="flex justify-between items-center bg-slate-800 p-4 rounded-xl shadow-md hover:scale-[1.01] transition"
+            >
 
-            <button onClick={() => eliminar(t.id)}>
-              🗑️
-            </button>
+              <span className="text-lg">{t.tarea}</span>
 
-            <button onClick={() => editar(t.id, t.tarea)}>
-              ✏️
-            </button>
-          </li>
-        ))}
-      </ul>
+              <div className="flex gap-2">
+                <button
+                  onClick={() => editar(t.id, t.tarea)}
+                  className="bg-yellow-700 hover:bg-yellow-600 px-3 py-1 rounded-lg"
+                >
+                  ✏️
+                </button>
 
+                <button
+                  onClick={() => eliminar(t.id)}
+                  className="bg-green-700 hover:bg-green-600 px-3 py-1 rounded-lg"
+                >
+                  🗑️
+                </button>
+              </div>
+
+            </li>
+          ))}
+        </ul>
+
+      </div>
     </div>
   );
 }
